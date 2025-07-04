@@ -1,0 +1,9 @@
+# Virtual Environment
+venv
+
+# Environment
+web/.env
+web/.env.prod
+
+# Cache files
+web/django_k8s/__pycache__
