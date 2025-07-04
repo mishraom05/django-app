@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-k8s-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-k8s-app
+  template:
+    metadata:
+      labels:
+        app: django-k8s-app 
+    spec:
+      containers:
+      - name: django-k8s-app-cont
+        image: registry.digitalocean.com/my-conreg/django-k8s:v2
+        imagePullPolicy: Always
+        env:
+         - name: PORT
+           value: "8000"
+        envFrom:
+         - secretRef:
+            name: django-k8s-web-prod-env
+        resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1000m"
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+        - name: my-conreg
