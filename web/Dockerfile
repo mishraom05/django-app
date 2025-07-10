@@ -1,5 +1,5 @@
 # Base Image
-FROM python:3.9.7-slim as build
+FROM python:3.9.7-slim AS build
 
 # Copy application related files into app folder
 COPY . /app
